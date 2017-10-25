@@ -1,0 +1,24 @@
+{
+   "result":{
+      "search1":{
+         "url":"/submit-request",
+         "name":["laptop request","laptop requistion"]
+      },
+      "search2":{
+         "url":"/laptop-return",
+         "name":"laptop return"
+      },
+      "search3":{
+         "url":"/laptop-submission",
+         "name":"laptop submission"
+      },
+      "search4":{
+         "url":"/desktop-submission",
+         "name":"Desktop submission"
+      },
+      "search5":{
+         "url":"/laptop-lost",
+         "name":"laptop lost"
+      }
+   }
+}

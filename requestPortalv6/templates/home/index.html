@@ -1,0 +1,647 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.41.0.min.js"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.48.0.min.js"></script>
+
+<style>
+#circle-header {
+    position: absolute;
+    top: 110px;
+    left: 200px;
+    width: 340px;
+    height: 340px;
+    border-radius: 280px;
+    background-color: white;
+}
+
+.page-header{
+	margin: 0px 0 20px !important;
+    border-bottom: 1px solid #eee;
+    background-color: white !important;
+    height: 550px;
+}
+.container-fluid{
+width:100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+.text{
+width:600px;
+
+
+margin-top:100px;
+float:right;
+margin-right:145px;
+}
+
+h1{
+font-size:44px;
+color:white;
+font-weight:normal;
+}
+h3{
+font-size:24px;
+color:black;
+font-weight:normal;
+}
+h4{
+font-size:24px;
+color:black;
+font-weight:normal;
+}
+h5{
+font-size:16px;
+color:black;
+font-weight:normal;
+}
+h2{
+font-size:30px;
+color:black;
+font-weight:bold;
+}
+.custom{
+font-size:24px;
+color:#41AA61 !important;
+font-weight:normal;
+}
+.btn{
+color:#2a8e47 !important;
+}
+#imaginary_container{
+    margin-top:5%;
+}
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+.space{
+margin-top:5%;
+}
+.wipro{
+margin-top:18px;
+margin-left:40px;
+
+
+
+}
+input#wisdom {
+			padding: 4px;
+			font-size: 1em;
+			width: 495px;
+		}
+
+		input::placeholder {
+			color: #ccc;
+			font-style: italic;
+		}
+
+		p.userRequest {
+			margin: 4px;
+			padding: 4px 10px 4px 10px;
+			border-radius: 4px;
+			min-width: 50%;
+			max-width: 85%;
+			float: left;
+			background-color: #7d7;
+		}
+
+		p.lexResponse {
+			margin: 4px;
+			padding: 4px 10px 4px 10px;
+			border-radius: 4px;
+			text-align: right;
+			min-width: 50%;
+			max-width: 85%;
+			float: right;
+			background-color: #bbf;
+			font-style: italic;
+		}
+
+		p.lexError {
+			margin: 4px;
+			padding: 4px 10px 4px 10px;
+			border-radius: 4px;
+			text-align: right;
+			min-width: 50%;
+			max-width: 85%;
+			float: right;
+			background-color: #f77;
+		}
+	element.style {
+
+    background-color: rgba(189, 224, 226, 0.46) !important;
+
+}
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 250px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+.panel-primary {
+    border-color: #41AA61;
+    margin-top: 69px !important;
+}
+.img-align{
+ margin-left: 277px;
+    margin-top: -121px;
+
+}
+.chat{
+margin-left:0px;
+margin-top:150px;
+
+}
+.audio{
+	margin-top: 200px;
+}
+.text{
+	margin-top: 37px;
+}
+.textAudio{
+	    margin-top: -125px;
+    margin-left: 120px;
+}
+.textmodal{
+margin-left: 350px !important;
+}
+.panel-primary>.panel-heading {
+
+    background-color: #1b5790 !important;
+	}
+	.msg{
+		margin-left:200px;
+	}
+	  .white-circle {
+        cursor: pointer;
+        background-color: #fff;
+        box-shadow: 0 0 8px #d8dbe3;
+        border-radius: 100px;
+        height: 100px;
+        margin: 0 auto;
+        width: 100px;
+    }
+
+    .white-circle:hover {
+        box-shadow: 0 0 8px #007dbc;
+    }
+
+    .white-circle img {
+        position: relative;
+        top: 18px;
+    }
+
+    .audio-control {
+
+
+        margin-left: -4px;
+        text-align: center;
+				padding-top:10px;
+    }
+		 canvas {
+        height: 100px;
+        width: 100vw;
+        margin-top: -50px;
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 0;
+        z-index: -1;
+    }
+	.upper-first{
+		width:1381px;
+		height:80px;
+		background-color:#1b5790;
+		text-align:center;
+
+	}
+		.upper-second{
+		width:1381px;
+		height:30px;
+		background-color:#b2d281;
+		text-align:center;
+
+	}
+	.main{
+		margin-top:10px;
+	}
+	.logout {
+    margin-right: -67px;
+    margin-top: -36px;
+    float: right;
+		color:white !important;
+}
+.pre-circle1{
+	position: absolute;
+
+    width: 110px;
+    height: 110px;
+    border-radius: 280px;
+    background-color: #619af4;
+
+}
+.pre-circle2{
+	position: absolute;
+
+    width: 110px;
+    height: 110px;
+    border-radius: 280px;
+    background-color: #efe03b;
+
+
+}
+.pre-circle3{
+	position: absolute;
+
+    width: 110px;
+    height: 110px;
+    border-radius: 280px;
+    background-color: #46ce6c;
+
+
+}
+.pre-circle4{
+	position: absolute;
+
+    width: 110px;
+    height: 110px;
+    border-radius: 280px;
+    background-color: #8335b7;
+
+
+}
+.pre-circle5{
+	position: absolute;
+
+    width: 110px;
+    height: 110px;
+    border-radius: 280px;
+    background-color: #e8306a;
+
+
+}
+.page-header{
+	height:500px !important;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-sm-12 upper-first">
+			<h1> NextGen Interaction System</h1>
+		</div>
+		<div class="col-sm-12 upper-second">
+		</div>
+	</div>
+	<div class="row col-sm-12 ">
+		<div id="circle-header" class="col-sm-5">
+
+			<img class="wipro" src="{% static 'wipro-logo.png' %}" alt="wipro-logo" height="200px">
+
+		</div>
+		<div class="text col-sm-7">
+
+			<!-- Search Bar-->
+      <h5>Hi !{{request.user}}</h5>
+			<button type="button" class="logout btn btn-danger" disabled>Logout</button>
+			<h3>Text and Search</h3>
+			<div id="imaginary_container">
+				<form method="POST" action="search">
+					<div class="input-group stylish-input-group">
+
+							{% csrf_token %}
+							<input type="text" class="form-control" name="search" id="search" placeholder="Search" >
+
+						<span class="input-group-addon">
+							<button type="submit" id="send">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+
+					</div>
+				</form>
+			</div>
+						<!-- search bar end-->
+			<h2>else</h2>
+			<h3>Take Bot Help</h3>
+			<div class="space">
+
+				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#textModal" data-backdrop="static" data-keyboard="false">Text Chat <span class="glyphicon glyphicon-pencil"></span></button>
+				<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#audioModal" data-backdrop="static" data-keyboard="false">Audio Chat <span class="glyphicon glyphicon-volume-up"></span></button>
+			</div>
+			<h5><u>Most Visited Links</u></h5>
+      {% for i,j  in top_names.items %}
+
+			<ul>
+				<li><a href="{{i}}">{{j}}</a></li>
+
+			</ul>
+        {% endfor %}
+		</div>
+
+
+
+
+	</div>
+
+</div>
+
+
+<!-- Modal for Text chat-->
+				<div class="modal fade text textmodal" id="textModal" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="panel panel-primary" id="text_chat">
+							<a class="close" data-dismiss="modal">&times;</a>
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> Text Chat
+
+                </div>
+
+            <div class="panel-collapse " id="">
+                <div class="panel-body" id="conversation">
+                    <ul id="log" class="chat" >
+
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <form id="chatform" style="margin-top: 10px">
+						<input type="text" id="wisdom" size="80" value="" placeholder="Type here and click on Submit" >
+
+
+
+					<input type="button" class="btn btn-default" name="submit" id="submit" value="Submit" onclick="return pushChat();">
+
+												</form>
+                    </div>
+                </div>
+          	</div>
+						</div>
+
+					</div>
+				</div>
+
+<script type="text/javascript">
+  var today = new Date()
+  var curHr = today.getHours()
+
+
+  if (curHr<=12){
+    document.getElementById('log').innerHTML += 'Hi! Good Morning <br>How Can I help you?';
+
+  }
+  else if (curHr>12 && curHr<18){
+    document.getElementById('log').innerHTML += 'Hi! Good AfterNoon <br>How Can I help you?';
+
+  }
+  else if (curHr>18 ){
+    document.getElementById('log').innerHTML += 'Hi! Good Evening <br>How Can I help you?';
+
+  }
+
+
+</script>
+<!-- end Text Chat MOdal-->
+
+<!-- Modal for Audio chat-->
+  <div class="modal fade audio" id="audioModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content aud panel-primary">
+				<button data-dismiss="modal" class="close">×</button>
+				<div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> Voice Chat
+
+                </div>
+        <div class="row wrapper">
+						<div class="audio-control">
+        <p id="audio-control" class="white-circle">
+            <img src="{% static 'lex.png' %}">
+            <canvas class="visualizer"></canvas>
+        </p>
+        <p><span id="message"></span></p>
+        <p>
+            <input type="text" id="ACCESS_KEY_ID" name="ACCESS KEY ID" placeholder="Access Key Id" />
+        </p>
+        <p>
+            <input type="text" id="SECRET_KEY" name="SECRET KEY" placeholder="Secret Key" />
+        </p>
+        <p>
+            <input type="text" id="BOT" name="BOT" placeholder="Bot Name" />
+        </p>
+				<h4>Start talking to Bot</h4>
+    </div>
+					</div>
+      </div>
+
+    </div>
+  </div>
+<!-- end Text Audio MOdal-->
+<script type="text/javascript">
+document.getElementById("search")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("send").click();
+    }
+});
+</script>
+<script>
+	$('#text_chat').keypress(function(e) {
+    if(e.which == 13) { // Checks for the enter key
+        e.preventDefault(); // Stops IE from triggering the button to be clicked
+    }
+});
+
+
+</script>
+<script type="text/javascript">
+		// set the focus to the input box
+		document.getElementById("wisdom").focus();
+
+		// Initialize the Amazon Cognito credentials provider
+		AWS.config.region = 'us-east-1'; // Region
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+		// Provide your Pool Id here
+			IdentityPoolId: 'us-east-1:d16e2212-280b-45bc-a8e5-6cfbf89a77ec',
+		});
+
+		var lexruntime = new AWS.LexRuntime();
+		var lexUserId = 'chatbot-demo' + Date.now();
+		var sessionAttributes = {};
+
+		function pushChat() {
+
+			// if there is text to be sent...
+			var wisdomText = document.getElementById('wisdom');
+			if (wisdomText && wisdomText.value && wisdomText.value.trim().length > 0) {
+
+				// disable input to show we're sending it
+				var wisdom = wisdomText.value.trim();
+				wisdomText.value = '...';
+				wisdomText.locked = true;
+
+				// send it to the Lex runtime
+				var params = {
+					botAlias: '$LATEST',
+					botName: 'BookTrip',
+					inputText: wisdom,
+					userId: lexUserId,
+					sessionAttributes: sessionAttributes
+				};
+				showRequest(wisdom);
+				lexruntime.postText(params, function(err, data) {
+					if (err) {
+						console.log(err, err.stack);
+						showError('Error:  ' + err.message + ' (see console for details)')
+					}
+					if (data) {
+						// capture the sessionAttributes for the next cycle
+						sessionAttributes = data.sessionAttributes;
+						// show response and/or error/dialog status
+						showResponse(data);
+					}
+					// re-enable input
+					wisdomText.value = '';
+					wisdomText.locked = false;
+				});
+			}
+			// we always cancel form submission
+			return false;
+		}
+
+		function showRequest(daText) {
+
+			var conversationDiv = document.getElementById('conversation');
+			var requestPara = document.createElement("P");
+			requestPara.className = 'userRequest';
+			requestPara.appendChild(document.createTextNode(daText));
+			conversationDiv.appendChild(requestPara);
+			conversationDiv.scrollTop = conversationDiv.scrollHeight;
+		}
+
+		function showError(daText) {
+
+			var conversationDiv = document.getElementById('conversation');
+			var errorPara = document.createElement("P");
+			errorPara.className = 'lexError';
+			errorPara.appendChild(document.createTextNode(daText));
+			conversationDiv.appendChild(errorPara);
+			conversationDiv.scrollTop = conversationDiv.scrollHeight;
+		}
+
+		function showResponse(lexResponse) {
+
+			var conversationDiv = document.getElementById('conversation');
+			var responsePara = document.createElement("P");
+			responsePara.className = 'lexResponse';
+			if (lexResponse.message) {
+				responsePara.appendChild(document.createTextNode(lexResponse.message));
+				responsePara.appendChild(document.createElement('br'));
+			}
+			if (lexResponse.dialogState === 'ReadyForFulfillment') {
+				responsePara.appendChild(document.createTextNode(
+					'Ready for fulfillment'));
+				// TODO:  show slot values
+			} else {
+				responsePara.appendChild(document.createTextNode(
+					'(' + lexResponse.dialogState + ')'));
+			}
+			conversationDiv.appendChild(responsePara);
+			conversationDiv.scrollTop = conversationDiv.scrollHeight;
+		}
+
+	</script>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.48.0.min.js"></script>
+    <script type="text/javascript">
+    window.lexaudio = {};
+    </script>
+    <script src="scripts/control.js" type="text/javascript"></script>
+    <script src="scripts/recorder.js" type="text/javascript"></script>
+    <script src="scripts/renderer.js" type="text/javascript"></script>
+    <script src="scripts/conversation.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    if (window.addEventListener) window.addEventListener("load", new lexaudio.example(), false);
+    else if (window.attachEvent) window.attachEvent("onload", setup(new lexaudio.example()));
+    else window.onload = new lexaudio.example();
+    </script>
+
+
+
+
+</body>
+</html>
